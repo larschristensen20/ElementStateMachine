@@ -6,8 +6,7 @@ namespace ElementStateMachine
 {
     /// <summary>
     /// A generic event class, where an incoming event is represented as a string
-    /// This is a slightly modified version of 
-    /// Ulrik Pagh Schultz Event found at https://github.com/ulrikpaghschultz/MDSD.git && MDSD/src/statemachine/generic/Event.java
+    /// This is a slightly modified version of Ulrik Pagh Schultz's Event class found at https://github.com/ulrikpaghschultz/MDSD.git 
     /// </summary>
     public class Event
     {
