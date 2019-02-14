@@ -20,29 +20,29 @@ namespace ElementStateMachine
         /// Set the current state of the state machine
         /// </summary>
         /// <param name="state">the new state</param>
-        public void SetState(State<T> state) => currentState = state;
+        public virtual void SetState(State<T> state) => currentState = state;
 
         /// <summary>
         /// Get the current state of the statemachine
         /// </summary>
-        public State<T> GetState => currentState;
+        public virtual State<T> GetState => currentState;
 
         /// <summary>
         /// Reset the runtime state
         /// </summary>
-        public void ResetExtendedState() {; }
+        public virtual void ResetExtendedState() {; }
 
         /// <summary>
         /// Get the name of the currently executing state
         /// </summary>
         /// <returns>The name of the current state</returns>
-        public string GetStateName() => currentState.ToString();
+        public virtual string GetStateName() => currentState.ToString();
 
         /// <summary>
         /// Get a string representation of the value of an extended state variable
         /// </summary>
         /// <param name="s">the name of the variable</param>
         /// <returns>string representation of the state</returns>
-        public string GetExtendedState(string s) { if (s == null) return currentState.GetName(); else throw new Exception("Bad name for extended state: " + s); }
+        public virtual string GetExtendedState(string s) { if (s == null) return currentState.GetName(); else throw new Exception("Bad name for extended state: " + s); }
     }
 }
