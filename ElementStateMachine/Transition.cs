@@ -8,17 +8,17 @@ namespace ElementStateMachine
 
         public Transition(string targetState) { this.targetState = targetState; }
 
-        public string Action(T extendedState)
+        public virtual string Action(T extendedState)
         {
             Effect(extendedState);
             return targetState;
         }
 
-        public string GetTarget() => targetState;
+        public virtual string GetTarget() => targetState;
 
-        protected void Effect(T extendedState) {; }
+        public virtual void Effect(T extendedState) { ; }
 
-        public bool IsApplicable(T extendedState) => true;
+        public virtual bool IsApplicable(T extendedState) => true;
        
     }
 }
