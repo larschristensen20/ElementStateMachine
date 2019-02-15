@@ -27,6 +27,7 @@ namespace ElementStateMachine
         {
             runtime.ResetExtendedState();
             SetState(initialStateName);
+            Format();
         }
 
         public void SetState(string stateID)
@@ -51,6 +52,16 @@ namespace ElementStateMachine
             else
                 return runtime.GetExtendedState(s);
         }
+
+        public void Format()
+        {
+            foreach (State<GenericRuntimeState> s in states)
+            {
+                Console.WriteLine("In state: " + s.GetName);
+                Console.ReadLine();
+            }
+        }
+
     }
 
     

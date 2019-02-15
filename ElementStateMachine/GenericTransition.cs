@@ -64,7 +64,7 @@ namespace ElementStateMachine
         }
 
         public new string ToString() {
-            return "T(" + base.GetTarget() + "): " + possibleEffect + "@" + effectVariableName + "," + effectArgument;
+            return "T(" + base.GetTarget() + "): " /**+ possibleEffect*/ + "@" + effectVariableName + "," /**+ effectArgument*/;
         }
     }
 }

@@ -3,12 +3,12 @@ using static ElementStateMachine.FluentMachine;
 
 namespace ElementStateMachine
 {
-    class Program
+    class PhaseChanger
     {
         static void Main(string[] args)
         {
-            new PhaseChangerMachine1();
-            
+            new MachineExecutor(new PhaseChangerMachine1().GetMetaModel());
+
             new PhaseChangerMachine2();
         }
     }
