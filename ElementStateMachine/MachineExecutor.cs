@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ElementStateMachine
 {
@@ -17,9 +18,8 @@ namespace ElementStateMachine
             foreach (State<T> state in allStates)
             {
                 states.Add(state.GetName(), state);
-                Console.WriteLine("In state: " + state.GetName());
+                Console.WriteLine("In state: " + state.ToString);
                 Console.ReadKey();
-
             }
             initialStateName = allStates[0].GetName();
             runtime = description.CreateRuntimeState();
@@ -29,7 +29,6 @@ namespace ElementStateMachine
         {
             runtime.ResetExtendedState();
             SetState(initialStateName);
-            Format();
         }
 
         public void SetState(string stateID)
@@ -55,11 +54,11 @@ namespace ElementStateMachine
                 return runtime.GetExtendedState(s);
         }
 
-        public void Format()
+        public void Format(IMachineDescription<T> description)
         {
-            foreach (KeyValuePair<string, State<T>> s in states)
+            foreach (State<T> s in description.GetAllStates())
             {
-                
+                s.ToString();
             }
         }
 
