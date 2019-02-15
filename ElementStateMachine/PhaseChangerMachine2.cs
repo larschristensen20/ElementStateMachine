@@ -11,24 +11,24 @@ namespace ElementStateMachine
         {
             State("SOLID").
                 Transition("HEAT").To("LIQUID").
-                Transition("HEAT").To("GLASS").
                 Transition("SUPERHEAT").To("GAS").
+                Transition("HEAT").To("GLASS").
             State("GLASS").
-                Transition("HEAT").To("LIQUID").
                 Transition("COOL").To("GLASS").
+                Transition("HEAT").To("LIQUID").
             State("LIQUID").
-                Transition("HEAT").To("GAS").
                 Transition("COOL").To("SOLID").
                 Transition("COOL").To("GLASS").
                 Transition("SUPERCOOL").To("SUPERFLUID").
+                Transition("HEAT").To("GAS").
             State("SUPERFLUID").
                 Transition("SUPERHEAT").To("LIQUID").
             State("GAS").
-                Transition("HEAT").To("PLASMA").
                 Transition("COOL").To("LIQUID").
                 Transition("SUPERCOOL").To("SOLID").
                 Transition("SUPERHEAT").To("PLASMA").
                 Transition("SUPERCOOL").To("BOSE EINSTEIN CONDENSATE").
+                Transition("HEAT").To("PLASMA").
             State("BOSE EINSTEIN CONDENSATE").
                 Transition("SUPERHEAT").To("GAS").
             State("PLASMA").

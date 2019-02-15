@@ -9,16 +9,16 @@ namespace ElementStateMachine
         public override void Build()
         {
             State("SOLID").
-                Transition("HEAT").To("LIQUID").
                 Transition("SUPERHEAT").To("GAS").
+                Transition("HEAT").To("LIQUID").
             State("LIQUID").
-                Transition("HEAT").To("GAS").
                 Transition("COOL").To("SOLID").
+                Transition("HEAT").To("GAS").
             State("GAS").
-                Transition("HEAT").To("PLASMA").
                 Transition("COOL").To("LIQUID").
                 Transition("SUPERCOOL").To("SOLID").
                 Transition("SUPERHEAT").To("PLASMA").
+                Transition("HEAT").To("PLASMA").
             State("PLASMA").
                 Transition("COOL").To("GAS");
         }
