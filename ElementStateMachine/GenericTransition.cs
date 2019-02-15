@@ -63,7 +63,7 @@ namespace ElementStateMachine
             }
         }
 
-        public new string ToString() {
+        public override string ToString() {
             return "T(" + base.GetTarget() + "): " /**+ possibleEffect*/ + "@" + effectVariableName + "," /**+ effectArgument*/;
         }
     }

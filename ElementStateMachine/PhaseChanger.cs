@@ -7,9 +7,8 @@ namespace ElementStateMachine
     {
         static void Main(string[] args)
         {
-            new MachineExecutor<GenericRuntimeState>(new PhaseChangerMachine3().GetMetaModel());
-
-            new PhaseChangerMachine2();
+            new MachineExecutor<GenericRuntimeState>(new PhaseChangerMachine2().GetMetaModel());
+            new MachineExecutor<GenericRuntimeState>(new PhaseChangerMachine1().GetMetaModel());
         }
     }
 }

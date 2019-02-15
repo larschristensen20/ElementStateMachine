@@ -19,6 +19,6 @@ namespace ElementStateMachine
         public virtual void Effect(T extendedState) { ; }
 
         public virtual bool IsApplicable(T extendedState) => true;
-       
+
     }
 }

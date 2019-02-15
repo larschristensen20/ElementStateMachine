@@ -35,7 +35,7 @@ namespace ElementStateMachine
 
         public void BuildMachine()
         {
-            if (metamodel == null) return;
+            if (metamodel != null) return;
             Build();
             FlushTransition(null, null, 0);
             if (currentState == null) throw new Exception("Empty Statemachine definition");
@@ -48,7 +48,7 @@ namespace ElementStateMachine
 
         public FluentMachine State(string name)
         {
-            if(currentState == null)
+            if(currentState != null)
             {
                 FlushTransition(null, null, 0);
                 states.Add(currentState);

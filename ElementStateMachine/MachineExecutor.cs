@@ -17,6 +17,8 @@ namespace ElementStateMachine
             foreach (State<T> state in allStates)
             {
                 states.Add(state.GetName(), state);
+                Console.WriteLine("In state: " + state.GetName());
+                Console.ReadKey();
 
             }
             initialStateName = allStates[0].GetName();
@@ -57,8 +59,7 @@ namespace ElementStateMachine
         {
             foreach (KeyValuePair<string, State<T>> s in states)
             {
-                Console.WriteLine("In state: " + s.Value.ToString);
-                Console.ReadLine();
+                
             }
         }
 
