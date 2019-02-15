@@ -9,7 +9,7 @@ namespace ElementStateMachine
     public class State<T> where T: AbstractRuntimeState<T>
     {
         private string name;
-        private Dictionary<string, List<Transition<T>>> Transitions = new Dictionary<string, List<Transition<T>>>();
+        private Dictionary<string, List<Transition<T>>> transitions = new Dictionary<string, List<Transition<T>>>();
 
         public State(string name)
         {
@@ -18,17 +18,17 @@ namespace ElementStateMachine
 
         public void AddTransition(string eventName, Transition<T> transition)
         {
-            List<Transition<T>> matches = Transitions[eventName];
+            List<Transition<T>> matches = transitions[eventName];
             if (matches == null)
             {
                 matches = new List<Transition<T>>();
-                Transitions.Add(eventName, matches);
+                transitions.Add(eventName, matches);
             }
             matches.Add(transition);
         }
 
         public void ProcessEvent(MachineExecutor<T> machine, T runtime, Event e) {
-            List<Transition<T>> matches = Transitions[e.Code()];
+            List<Transition<T>> matches = transitions[e.Code()];
             if (matches == null) return;
             foreach (Transition<T> transition in matches)
             {
@@ -45,10 +45,10 @@ namespace ElementStateMachine
 
         public string GetName() => name;
 
-        public HashSet<string> ApplicableEvents => new HashSet<string>(Transitions.Keys);
+        public HashSet<string> ApplicableEvents => new HashSet<string>(transitions.Keys);
 
-        public List<Transition<T>> GetTransitionsForEvent(string e) => Transitions[e];
+        public List<Transition<T>> GetTransitionsForEvent(string e) => transitions[e];
 
-        public Dictionary<string, List<Transition<T>>> GetAllTransitions() => Transitions;
+        public Dictionary<string, List<Transition<T>>> GetAllTransitions() => transitions;
     }
 }

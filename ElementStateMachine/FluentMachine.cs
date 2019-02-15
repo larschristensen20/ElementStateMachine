@@ -44,7 +44,7 @@ namespace ElementStateMachine
             metamodel = new MachineMetaModel(states, variables);
         }
 
-        public abstract void Build();
+        public abstract virtual void Build();
 
         public FluentMachine State(string name)
         {
@@ -126,7 +126,7 @@ namespace ElementStateMachine
 
         public void IntegerState(string name)
         {
-            variables.Add(name);
+            this.metamodel.GetExtendedStateVariables().Add(name);
         }
 
 
