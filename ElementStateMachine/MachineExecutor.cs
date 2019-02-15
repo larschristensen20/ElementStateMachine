@@ -55,9 +55,9 @@ namespace ElementStateMachine
 
         public void Format()
         {
-            foreach (State<GenericRuntimeState> s in states)
+            foreach (KeyValuePair<string, State<T>> s in states)
             {
-                Console.WriteLine("In state: " + s.GetName);
+                Console.WriteLine("In state: " + s.Value.ToString);
                 Console.ReadLine();
             }
         }

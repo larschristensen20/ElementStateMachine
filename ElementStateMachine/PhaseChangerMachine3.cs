@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ElementStateMachine
 {
-    public class PhaseChangerMachine1 : FluentMachine 
+    public class PhaseChangerMachine3 : FluentMachine
     {
         public override void Build()
         {
@@ -24,3 +24,4 @@ namespace ElementStateMachine
         }
     }
 }
+

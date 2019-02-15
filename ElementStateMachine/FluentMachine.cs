@@ -44,7 +44,7 @@ namespace ElementStateMachine
             metamodel = new MachineMetaModel(states, variables);
         }
 
-        public abstract virtual void Build();
+        public abstract void Build();
 
         public FluentMachine State(string name)
         {

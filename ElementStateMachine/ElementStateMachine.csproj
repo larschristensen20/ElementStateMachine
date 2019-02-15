@@ -5,8 +5,4 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Include="PhaseChangerMachine1.cs" />
-  </ItemGroup>
-
 </Project>
