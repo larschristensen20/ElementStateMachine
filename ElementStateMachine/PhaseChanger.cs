@@ -8,7 +8,7 @@ namespace ElementStateMachine
         static void Main(string[] args)
         {
             new PhaseChangerMachine1();
-            foreach ()
+            
             new PhaseChangerMachine2();
         }
     }

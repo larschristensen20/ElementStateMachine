@@ -9,18 +9,18 @@ namespace ElementStateMachine
         public override void Build()
         {
             State("SOLID").
-                Transition("HEAT").To("LIQUID").SetState("LIQUID").
-                Transition("SUPERHEAT").To("GAS").SetState("GAS").
+                Transition("HEAT").To("LIQUID").
+                Transition("SUPERHEAT").To("GAS").
             State("LIQUID").
-                Transition("HEAT").To("GAS").SetState("GAS").
-                Transition("COOL").To("SOLID").SetState("SOLID").
+                Transition("HEAT").To("GAS").
+                Transition("COOL").To("SOLID").
             State("GAS").
-                Transition("HEAT").To("PLASMA").SetState("PLASMA").
-                Transition("COOL").To("LIQUID").SetState("LIQUID").
-                Transition("SUPERCOOL").To("SOLID").SetState("SOLID").
-                Transition("SUPERHEAT").To("PLASMA").SetState("PLASMA").
+                Transition("HEAT").To("PLASMA").
+                Transition("COOL").To("LIQUID").
+                Transition("SUPERCOOL").To("SOLID").
+                Transition("SUPERHEAT").To("PLASMA").
             State("PLASMA").
-                Transition("COOL").To("GAS").SetState("GAS");
+                Transition("COOL").To("GAS");
         }
     }
 }
