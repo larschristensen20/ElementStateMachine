@@ -34,8 +34,8 @@ namespace ElementStateMachine
             {
                 if(transition.IsApplicable(runtime))
                 {
-                    string newMaybe = transition.Action(runtime);
-                    if (newMaybe != null) machine.SetState(newMaybe);
+                    string possibleTransition = transition.Action(runtime);
+                    if (possibleTransition != null) machine.SetState(possibleTransition);
                     return;
                 }
             }
