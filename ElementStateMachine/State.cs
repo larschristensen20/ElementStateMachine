@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 
 namespace ElementStateMachine
 {
-    public class State<T> where T: AbstractRuntimeState<T>
+    public class State<T> where T : AbstractRuntimeState<T>
     {
         private string name;
         private Dictionary<string, List<Transition<T>>> transitions = new Dictionary<string, List<Transition<T>>>();
@@ -17,14 +17,14 @@ namespace ElementStateMachine
         }
 
         public void AddTransition(string eventName, Transition<T> transition)
-        {
-            List<Transition<T>> matches = transitions[eventName];
-            if (matches == null)
-            {
-                matches = new List<Transition<T>>();
-                transitions.Add(eventName, matches);
-            }
-            matches.Add(transition);
+        { 
+            List<Transition<T>> matches = transitions.GetValueOrDefault(eventName);
+                if (matches == null)
+                {
+                    matches = new List<Transition<T>>();
+                    transitions.Add(eventName, matches);
+                }
+                matches.Add(transition);
         }
 
         public void ProcessEvent(MachineExecutor<T> machine, T runtime, Event e) {

@@ -113,6 +113,7 @@ namespace ElementStateMachine
 
             Transition<GenericRuntimeState> transition = factory.CreateTransitionHook(targetTransition, possibleEffect, effectVariable, effectArgument,
                 condition, possibleCondVariableName, condValue);
+            currentState.AddTransition(pendingEvent, transition);
 
             possibleEffect = null;
             effectVariable = null;

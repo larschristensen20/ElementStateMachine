@@ -15,12 +15,15 @@ namespace ElementStateMachine
         public MachineExecutor(IMachineDescription<T> description)
         {
             List<State<T>> allStates = description.GetAllStates();
+            
             foreach (State<T> state in allStates)
-            {
+            { 
                 states.Add(state.GetName(), state);
-                Console.WriteLine("In state: " + state.ToString);
-                Console.ReadKey();
+                Console.WriteLine("In state: " + state.ToString + " with Transition: "+" to: ");
+                Console.WriteLine(state.GetAllTransitions().ToString());
+                Console.ReadKey();  
             }
+            
             initialStateName = allStates[0].GetName();
             runtime = description.CreateRuntimeState();
         }
@@ -59,6 +62,8 @@ namespace ElementStateMachine
             foreach (State<T> s in description.GetAllStates())
             {
                 s.ToString();
+                s.GetAllTransitions().ToString();
+                
             }
         }
 
