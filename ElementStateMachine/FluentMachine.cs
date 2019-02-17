@@ -24,7 +24,9 @@ namespace ElementStateMachine
 
         private State<GenericRuntimeState> currentState;
 
-        private string pendingEvent, targetTransition, effectVariable;
+        private string pendingEvent, targetTransition;
+            
+        private string effectVariable;
 
         private Effect? possibleEffect;
 
