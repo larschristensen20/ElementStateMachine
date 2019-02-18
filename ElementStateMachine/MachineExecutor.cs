@@ -19,8 +19,8 @@ namespace ElementStateMachine
             foreach (State<T> state in allStates)
             { 
                 states.Add(state.GetName(), state);
-                //Console.WriteLine("In state: " + state + " with Transition: "+" to: ");
-                //Console.WriteLine(state.GetAllTransitions().Keys.ToString());
+                //Console.WriteLine("In state: " + state.ToString + " with Transition: "+" to: ");
+                //Console.WriteLine(state.GetAllTransitions().ToString());
                 //Console.ReadKey();  
             }
             
@@ -57,14 +57,14 @@ namespace ElementStateMachine
                 return runtime.GetExtendedState(s);
         }
 
-        public void Format(IMachineDescription<T> description)
+        public void Format()
         {
-            foreach (State<T> s in description.GetAllStates())
-            {
-                s.ToString();
-                s.GetAllTransitions().ToString();
+            //foreach (State<T> s in description.GetAllStates())
+            //{
+            //    s.ToString();
+            //    s.GetAllTransitions().ToString();
                 
-            }
+            //}
         }
 
     }

@@ -28,7 +28,7 @@ namespace ElementStateMachine
         }
 
         public void ProcessEvent(MachineExecutor<T> machine, T runtime, Event e) {
-            List<Transition<T>> matches = transitions[e.Code()];
+               List<Transition<T>> matches = transitions.GetValueOrDefault(e.Code());
             if (matches == null) return;
             foreach (Transition<T> transition in matches)
             {
@@ -41,7 +41,7 @@ namespace ElementStateMachine
             }
         }
 
-        public new string ToString => GetName();
+        public override string ToString()  => GetName();
 
         public string GetName() => name;
 
