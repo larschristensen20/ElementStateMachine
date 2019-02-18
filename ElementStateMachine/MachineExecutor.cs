@@ -19,9 +19,6 @@ namespace ElementStateMachine
             foreach (State<T> state in allStates)
             { 
                 states.Add(state.GetName(), state);
-                //Console.WriteLine("In state: " + state.ToString + " with Transition: "+" to: ");
-                //Console.WriteLine(state.GetAllTransitions().ToString());
-                //Console.ReadKey();  
             }
             
             initialStateName = allStates[0].GetName();

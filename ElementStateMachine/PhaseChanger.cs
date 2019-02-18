@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using static ElementStateMachine.FluentMachine;
 
 namespace ElementStateMachine
@@ -25,31 +26,39 @@ namespace ElementStateMachine
 
         static void Main(string[] args)
         {
+            Stopwatch stopwatch = new Stopwatch();
+            
             MachineExecutor<GenericRuntimeState> machine1 = new MachineExecutor<GenericRuntimeState>(new PhaseChangerMachine1().GetMetaModel());
-            MachineExecutor<GenericRuntimeState> machine2 = new MachineExecutor<GenericRuntimeState>(new PhaseChangerMachine2().GetMetaModel());
+            MachineExecutor<GenericRuntimeState> machine2  = new MachineExecutor<GenericRuntimeState>(new PhaseChangerMachine2().GetMetaModel());
             machine1.Initialize();
             machine2.Initialize();
 
             // Machine 1
+            stopwatch = Stopwatch.StartNew();
             Console.WriteLine("Machine1");
             foreach (Event e in generatedEvents)
             {
                 machine1.ProcessEvent(e);
                 
-                Console.WriteLine(machine1.GetStateName() + "    " + e.Code());
-                Console.ReadKey();
+                Console.WriteLine(machine1.GetStateName());
             }
+            stopwatch.Stop();
+            TimeSpan ts = stopwatch.Elapsed;
+            Console.WriteLine("Time for machine 1: "+ts + "\n");
 
             // Machine 2
-            Console.WriteLine("Machine2"); 
+            Console.WriteLine("Machine2");
+            stopwatch = Stopwatch.StartNew();
             foreach (Event e in generatedEvents)
             {
-                machine1.ProcessEvent(e);
-                
-                Console.WriteLine(machine1.GetStateName() + "    " + e.Code());
+                Console.WriteLine(machine2.GetStateName());
                 machine2.ProcessEvent(e);
-                Console.ReadKey();
+                
             }
+            stopwatch.Stop();
+            TimeSpan ts1 = stopwatch.Elapsed;
+            Console.WriteLine("Time for machine 1: " + ts1 +"\n");
+            Console.ReadKey();
         }
     }
 }
