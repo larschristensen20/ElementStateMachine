@@ -8,7 +8,7 @@ Clone the repository from [here](https://github.com/larschristensen20/ElementSta
 
 ### Description
 This project implements a fluent interface for making an internal DSL for a state machine within the context of matter state changes.
-The project features a metamodel of states and events, as well as a builder (the FluentMachine), and a MachineExecutor (interpreter).
+The project features a metamodel of states, transitions and events, as well as a builder (the FluentMachine), and a MachineExecutor (interpreter).
 The project itself is based heavily on Ulrik Pagh Schultz work in his [repository](https://github.com/ulrikpaghschultz/MDSD)
 
 ### Evaluation
