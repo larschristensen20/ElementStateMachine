@@ -1,7 +1,7 @@
 ##  First assignment for the MDSD course at University of Southern Denmark, 2nd semester of the Master in Software Engineering.
 This repository features the first assignment for the Model-Driven Software Development course at University of Southern Denmark.
 ### How to run it
-Unzip the project folder, and run the application using the ElementStateMachine.exe found in <yourUnzipLocation>\ElementStateMachine\ElementStateMachine\bin\Release\netcoreapp2.1\win10-x64
+Unzip the project folder, and run the application using the ElementStateMachine.exe found in <yourUnzipLocation>\ElementStateMachine\ElementStateMachine\bin\Release\netcoreapp2.1\win10-x64\publish
   or
 Clone the repository from [here](https://github.com/larschristensen20/ElementStateMachine), and build the project using Visual Studio 2017.
 
