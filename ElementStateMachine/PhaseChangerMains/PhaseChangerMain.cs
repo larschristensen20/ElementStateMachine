@@ -42,7 +42,7 @@ namespace ElementStateMachine
         /// <summary>
         /// The number of random events to use in the experiments
         /// </summary>
-        private static readonly int NEVENTS = 200000;
+        private static readonly int NEVENTS = 500;
 
         /// <summary>
         /// A list of events to use for generating a random event list
@@ -104,7 +104,7 @@ namespace ElementStateMachine
             // process the events in the generatedEvents list
             foreach (Event e in generatedEvents)
             {
-                machine1.ProcessEvent(e); 
+                machine1.ProcessEvent(e);
             }
             stopwatch.Stop();
             TimeSpan ts1 = stopwatch.Elapsed; // the elapsed time in the experiment
@@ -116,7 +116,7 @@ namespace ElementStateMachine
             // process the events in the generatedEvents list
             foreach (Event e in generatedEvents)
             {
-                machine2.ProcessEvent(e);   
+                machine2.ProcessEvent(e);
             }
             stopwatch.Stop();
             TimeSpan ts2 = stopwatch.Elapsed; // the elapsed time in the experiment
@@ -133,8 +133,6 @@ namespace ElementStateMachine
             stopwatch.Stop();
             TimeSpan ts3 = stopwatch.Elapsed; // the elapsed time in the experiment
             Console.WriteLine("Run time of Machine3: " + ts3);
-
-
             Console.ReadKey();
         }
     }
