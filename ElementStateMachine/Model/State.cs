@@ -42,14 +42,30 @@ namespace ElementStateMachine
     /// <typeparam name="T"></typeparam>
     public class State<T> where T : AbstractRuntimeState<T>
     {
+        /// <summary>
+        /// The name of the state
+        /// </summary>
         private string name;
+
+        /// <summary>
+        /// Transitions associated with this state
+        /// </summary>
         private Dictionary<string, List<Transition<T>>> transitions = new Dictionary<string, List<Transition<T>>>();
 
+        /// <summary>
+        /// Instantiate state for a given state machine
+        /// </summary>
+        /// <param name="name">the name of the state</param>
         public State(string name)
         {
             this.name = name;
         }
 
+        /// <summary>
+        /// Add a transition that is tested in this state when the corresponding event is received
+        /// </summary>
+        /// <param name="eventName">eventName name of event that can trigger this transition</param>
+        /// <param name="transition">transition the transition</param>
         public void AddTransition(string eventName, Transition<T> transition)
         { 
             List<Transition<T>> matches = transitions.GetValueOrDefault(eventName);
@@ -61,6 +77,13 @@ namespace ElementStateMachine
                 matches.Add(transition);
         }
 
+        /// <summary>
+        /// Process event by testing isApplicable in sequence, and then performing the action which
+        /// may have an effect and returns the name of a new state, if a transition is to be made.
+        /// </summary>
+        /// <param name="machine">the machine, which state is set</param>
+        /// <param name="runtime">the runtime</param>
+        /// <param name="e">the event to process</param>
         public void ProcessEvent(MachineExecutor<T> machine, T runtime, Event e) {
                List<Transition<T>> matches = transitions.GetValueOrDefault(e.Code());
             if (matches == null) return;
@@ -74,15 +97,34 @@ namespace ElementStateMachine
                 }
             }
         }
-
+        /// <summary>
+        /// Get the name of the state
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()  => GetName();
 
+        /// <summary>
+        /// Get the name of the state
+        /// </summary>
+        /// <returns>the name</returns>
         public string GetName() => name;
 
+        /// <summary>
+        /// Get the set of events that can be handled in this state
+        /// </summary>
         public HashSet<string> ApplicableEvents => new HashSet<string>(transitions.Keys);
 
+        /// <summary>
+        /// Get the set of transitions that correspond to a given event ID
+        /// </summary>
+        /// <param name="e">the event</param>
+        /// <returns></returns>
         public List<Transition<T>> GetTransitionsForEvent(string e) => transitions[e];
 
+        /// <summary>
+        /// Get all transitions (introspection)
+        /// </summary>
+        /// <returns>a map of event names (as string) and a List<Transition<T>></returns>
         public Dictionary<string, List<Transition<T>>> GetAllTransitions() => transitions;
     }
 }

@@ -37,12 +37,31 @@ namespace ElementStateMachine
     /// The main class that instanciates the MachineExecutor class to interpret the MetaModel.
     /// The class also runs an experiment using a number of events, and prints diagnostics (run time) about the experiments.
     /// </summary>
-    public class PhaseChanger
+    public class PhaseChangerMain
     {
+        /// <summary>
+        /// The number of random events to use in the experiments
+        /// </summary>
         private static readonly int NEVENTS = 200000;
 
-        private static List<Event> events_machine1 = MakeEventList("HEAT", "COOL", "SUPERCOOL", "SUPERHEAT");
-        private static Event[] generatedEvents = GenerateEventList(events_machine1, NEVENTS, new Random());
+        /// <summary>
+        /// A list of events to use for generating a random event list
+        /// </summary>
+        private static List<Event> events = MakeEventList("HEAT", "COOL", "SUPERCOOL", "SUPERHEAT");
+
+        /// <summary>
+        /// An array of Events that are generated randomly
+        /// Give the Random generator an integer as a seed to keep results consistent.
+        /// </summary>
+        private static Event[] generatedEvents = GenerateEventList(events, NEVENTS, new Random());
+
+        /// <summary>
+        /// Generate an array of random events for use in the experiments.
+        /// </summary>
+        /// <param name="events">a list of events</param>
+        /// <param name="nevents">the number of events to generate</param>
+        /// <param name="rand">the random generator</param>
+        /// <returns>an array of randomly generated events</returns>
         private static Event[] GenerateEventList(List<Event> events, int nevents, Random rand)
         {
             Event[] result = new Event[nevents];
@@ -51,6 +70,11 @@ namespace ElementStateMachine
             return result;
         }
 
+        /// <summary>
+        /// Makes up an event list based on the given param.
+        /// </summary>
+        /// <param name="names">an array of strings which should be made into events</param>
+        /// <returns></returns>
         private static List<Event> MakeEventList(params string[] names)
         {
             List<Event> events = new List<Event>();
@@ -60,34 +84,57 @@ namespace ElementStateMachine
 
         static void Main(string[] args)
         {
+            // initialize a stopwatch for diagnostic use
             Stopwatch stopwatch = new Stopwatch();
             
+            // create two state machines based on the meta model
             MachineExecutor<GenericRuntimeState> machine1 = new MachineExecutor<GenericRuntimeState>(new PhaseChangerMachine1().GetMetaModel());
             MachineExecutor<GenericRuntimeState> machine2  = new MachineExecutor<GenericRuntimeState>(new PhaseChangerMachine2().GetMetaModel());
+            MachineExecutor<GenericRuntimeState> machine3 = new MachineExecutor<GenericRuntimeState>(new PhaseChangerMachine3().GetMetaModel());
+
+            // initialize the machines
             machine1.Initialize();
             machine2.Initialize();
+            machine3.Initialize();
 
             // Machine 1
             stopwatch = Stopwatch.StartNew();
             Console.WriteLine("\n" + "Test of Machine1 started with: "+NEVENTS+" random events");
+
+            // process the events in the generatedEvents list
             foreach (Event e in generatedEvents)
             {
-                machine1.ProcessEvent(e);
+                machine1.ProcessEvent(e); 
             }
             stopwatch.Stop();
-            TimeSpan ts1 = stopwatch.Elapsed;
+            TimeSpan ts1 = stopwatch.Elapsed; // the elapsed time in the experiment
             Console.WriteLine("Run time of Machine1: "+ts1);
 
             // Machine 2
             Console.WriteLine("\n" + "Test of Machine2 started with: " + NEVENTS + " random events");
             stopwatch = Stopwatch.StartNew();
+            // process the events in the generatedEvents list
             foreach (Event e in generatedEvents)
             {
                 machine2.ProcessEvent(e);   
             }
             stopwatch.Stop();
-            TimeSpan ts2 = stopwatch.Elapsed;
+            TimeSpan ts2 = stopwatch.Elapsed; // the elapsed time in the experiment
             Console.WriteLine("Run time of Machine2: " + ts2);
+
+            // Machine 3
+            Console.WriteLine("\n" + "Test of Machine3 started with: " + NEVENTS + " random events");
+            stopwatch = Stopwatch.StartNew();
+            // process the events in the generatedEvents list
+            foreach (Event e in generatedEvents)
+            {
+                machine3.ProcessEvent(e);
+            }
+            stopwatch.Stop();
+            TimeSpan ts3 = stopwatch.Elapsed; // the elapsed time in the experiment
+            Console.WriteLine("Run time of Machine3: " + ts3);
+
+
             Console.ReadKey();
         }
     }
