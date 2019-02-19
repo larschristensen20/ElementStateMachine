@@ -4,6 +4,13 @@ using System.Linq;
 
 namespace ElementStateMachine
 {
+    /// <summary>
+    /// State machine executor: executes a state machine description,
+    /// keeping track of current state, stores a map from state name
+    /// to state object (used to perform state transitions)
+    /// This is a slightly modified version of Ulrik Pagh Schultz's MachineExecutor interface found at https://github.com/ulrikpaghschultz/MDSD.git 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class MachineExecutor<T> where T : AbstractRuntimeState<T>
     {
         private string initialStateName;
@@ -15,13 +22,16 @@ namespace ElementStateMachine
         public MachineExecutor(IMachineDescription<T> description)
         {
             List<State<T>> allStates = description.GetAllStates();
-            
+            Console.WriteLine("\n"+"State Machine created..." + "Possible states: ");
             foreach (State<T> state in allStates)
             { 
                 states.Add(state.GetName(), state);
+                states.TryGetValue(state.GetName(), out State<T> val);
+                Console.WriteLine("   " + val.GetName());              
             }
             
             initialStateName = allStates[0].GetName();
+            Console.WriteLine("Initial state: " + initialStateName);
             runtime = description.CreateRuntimeState();
         }
 
@@ -39,6 +49,8 @@ namespace ElementStateMachine
         }
 
         public string GetStateName() => runtime.GetStateName();
+
+        public List<Transition<T>> GetTransitionForEvent(string e) => runtime.GetState.GetTransitionsForEvent(e);
 
         public void ProcessEvent(Event e)
         {

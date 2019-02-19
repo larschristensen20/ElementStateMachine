@@ -5,6 +5,11 @@ using System.Text;
 
 namespace ElementStateMachine
 {
+    /// <summary>
+    /// Abstract class providing a fluent interface for defining a state machine using the generic statemachine framework(year2).
+    /// Acts as a builder but also allows the model to be directly interpreted to run the state machine.
+    /// This is a slightly modified version of Ulrik Pagh Schultz's FluentMachine class found at https://github.com/ulrikpaghschultz/MDSD.git 
+    /// </summary>
     public abstract class FluentMachine
     {
         private MachineMetaModel metamodel;
@@ -61,7 +66,7 @@ namespace ElementStateMachine
 
         public FluentMachine Transition(string e)
         {
-            if (targetTransition != null || possibleEffect != null) FlushTransition(null, null, 0);
+            if (targetTransition != null) FlushTransition(null, null, 0);
             pendingEvent = e;
             return this;
         }

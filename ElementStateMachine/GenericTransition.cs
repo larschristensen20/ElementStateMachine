@@ -5,6 +5,11 @@ using static ElementStateMachine.FluentMachine;
 
 namespace ElementStateMachine
 {
+    /// <summary>
+    /// Generic transition that performs its function depending on its description
+    /// of effects and conditions(passed as parameters, at most one of each)
+    /// This is a slightly modified version of Ulrik Pagh Schultz's GenericTransition class found at https://github.com/ulrikpaghschultz/MDSD.git 
+    /// </summary>
     public class GenericTransition : Transition<GenericRuntimeState>
     {
         private Effect? possibleEffect;

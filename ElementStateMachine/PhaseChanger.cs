@@ -7,8 +7,10 @@ namespace ElementStateMachine
 {
     class PhaseChanger
     {
+        private static readonly int NEVENTS = 200000;
+
         private static List<Event> events_machine1 = MakeEventList("HEAT", "COOL", "SUPERCOOL", "SUPERHEAT");
-        private static Event[] generatedEvents = GenerateEventList(events_machine1, 20, new Random());
+        private static Event[] generatedEvents = GenerateEventList(events_machine1, NEVENTS, new Random());
         private static Event[] GenerateEventList(List<Event> events, int nevents, Random rand)
         {
             Event[] result = new Event[nevents];
@@ -35,29 +37,25 @@ namespace ElementStateMachine
 
             // Machine 1
             stopwatch = Stopwatch.StartNew();
-            Console.WriteLine("Machine1");
+            Console.WriteLine("\n" + "Test of Machine1 started with: "+NEVENTS+" random events");
             foreach (Event e in generatedEvents)
             {
                 machine1.ProcessEvent(e);
-                
-                Console.WriteLine(machine1.GetStateName());
-            }
-            stopwatch.Stop();
-            TimeSpan ts = stopwatch.Elapsed;
-            Console.WriteLine("Time for machine 1: "+ts + "\n");
-
-            // Machine 2
-            Console.WriteLine("Machine2");
-            stopwatch = Stopwatch.StartNew();
-            foreach (Event e in generatedEvents)
-            {
-                Console.WriteLine(machine2.GetStateName());
-                machine2.ProcessEvent(e);
-                
             }
             stopwatch.Stop();
             TimeSpan ts1 = stopwatch.Elapsed;
-            Console.WriteLine("Time for machine 1: " + ts1 +"\n");
+            Console.WriteLine("Run time of Machine1: "+ts1);
+
+            // Machine 2
+            Console.WriteLine("\n" + "Test of Machine2 started with: " + NEVENTS + " random events");
+            stopwatch = Stopwatch.StartNew();
+            foreach (Event e in generatedEvents)
+            {
+                machine2.ProcessEvent(e);   
+            }
+            stopwatch.Stop();
+            TimeSpan ts2 = stopwatch.Elapsed;
+            Console.WriteLine("Run time of Machine2: " + ts2);
             Console.ReadKey();
         }
     }

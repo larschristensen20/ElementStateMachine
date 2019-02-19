@@ -5,6 +5,10 @@ using System.Linq;
 
 namespace ElementStateMachine
 {
+    /// <summary>
+    /// Generic extended state representation based on a map
+    /// This is a slightly modified version of Ulrik Pagh Schultz's GenericRuntimeState class found at https://github.com/ulrikpaghschultz/MDSD.git 
+    /// </summary>
     public class GenericRuntimeState : AbstractRuntimeState<GenericRuntimeState>
     {
         private Dictionary<string, int?> values = new Dictionary<string, int?>();
