@@ -40,8 +40,17 @@ namespace ElementStateMachine
     /// <typeparam name="T"></typeparam>
     public interface IMachineDescription<T> where T: AbstractRuntimeState<T>
     {
+        /// <summary>
+        /// Overridden by concrete state machine.  By convention the first element must be the initial state.
+        /// </summary>
+        /// <returns>List of all states, first element is initial state</returns>
         List<State<T>> GetAllStates();
 
+        /// <summary>
+        /// Overridden by the concrete state machine.  Factory method that creates an
+        /// instance of the specific extended state required for the statemachine
+        /// </summary>
+        /// <returns>new instance of the class that represents the extended state</returns>
         T CreateRuntimeState();
     }
 }

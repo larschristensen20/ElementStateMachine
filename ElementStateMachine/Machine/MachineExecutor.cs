@@ -40,12 +40,25 @@ namespace ElementStateMachine
     /// <typeparam name="T"></typeparam>
     public class MachineExecutor<T> where T : AbstractRuntimeState<T>
     {
+        /// <summary>
+        /// Initial state
+        /// </summary>
         private string initialStateName;
 
+        /// <summary>
+        /// Map from state name to state object
+        /// </summary>
         private Dictionary<string, State<T>> states = new Dictionary<string, State<T>>();
 
+        /// <summary>
+        /// Runtime state, including extended state
+        /// </summary>
         private T runtime;
 
+        /// <summary>
+        /// Initialize the state machine based on the machine description
+        /// </summary>
+        /// <param name="description"></param>
         public MachineExecutor(IMachineDescription<T> description)
         {
             List<State<T>> allStates = description.GetAllStates();
@@ -62,12 +75,19 @@ namespace ElementStateMachine
             runtime = description.CreateRuntimeState();
         }
 
+        /// <summary>
+        /// Reset the state machine 
+        /// </summary>
         public void Initialize()
         {
             runtime.ResetExtendedState();
             SetState(initialStateName);
         }
 
+        /// <summary>
+        /// Set the current active state
+        /// </summary>
+        /// <param name="stateID">the ID of the active state</param>
         public void SetState(string stateID)
         {
             State<T> state = states[stateID];
@@ -75,16 +95,27 @@ namespace ElementStateMachine
             runtime.SetState(state);
         }
 
+        /// <summary>
+        /// Get the name of the currently active state
+        /// </summary>
+        /// <returns>the name of the state</returns>
         public string GetStateName() => runtime.GetStateName();
 
-        public List<Transition<T>> GetTransitionForEvent(string e) => runtime.GetState.GetTransitionsForEvent(e);
 
+        /// <summary>
+        /// Process an incoming event based on the current state
+        /// </summary>
+        /// <param name="e">the event to process</param>
         public void ProcessEvent(Event e)
         {
             if (runtime.GetState == null) throw new Exception("State machine not initialized");
             runtime.GetState.ProcessEvent(this, runtime, e);
         }
-
+        /// <summary>
+        /// Get a string representation of the current runtime state
+        /// </summary>
+        /// <param name="s">the name of the extended state variable, null for the active state of the machine</param>
+        /// <returns>string representation of the current runtime state</returns>
         public string GetRuntimeState(string s)
         {
             if (s == null)
@@ -92,17 +123,6 @@ namespace ElementStateMachine
             else
                 return runtime.GetExtendedState(s);
         }
-
-        public void Format()
-        {
-            //foreach (State<T> s in description.GetAllStates())
-            //{
-            //    s.ToString();
-            //    s.GetAllTransitions().ToString();
-                
-            //}
-        }
-
     }
 
     
