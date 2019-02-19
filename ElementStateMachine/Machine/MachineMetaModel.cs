@@ -37,26 +37,47 @@ namespace ElementStateMachine
     /// </summary>
     public class MachineMetaModel : IMachineDescription<GenericRuntimeState>
     {
+        /// <summary>
+        /// The complete list of all states (first is assumed to be initial)
+        /// </summary>
         private List<State<GenericRuntimeState>> allStates;
 
+        /// <summary>
+        /// Set containing names of all extended state variables
+        /// </summary>
         private HashSet<string> extendedStateVariables;
 
+        /// <summary>
+        /// Initialize metamodel
+        /// </summary>
+        /// <param name="states">a list of states</param>
+        /// <param name="variables">a list of extendedstates</param>
         public MachineMetaModel(List<State<GenericRuntimeState>> states, HashSet<string> variables)
         {
             this.allStates = new List<State<GenericRuntimeState>>(states);
             this.extendedStateVariables = new HashSet<string>(variables);
         }
 
+        /// <summary>
+        /// Create a runtime state representation based on this metamodel
+        /// </summary>
+        /// <returns>a runtime state object representing the current state of the metamodel</returns>
         public GenericRuntimeState CreateRuntimeState()
         {
             return new GenericRuntimeState(extendedStateVariables);
         }
-
+        /// <summary>
+        /// Get all states in the metamodel
+        /// </summary>
+        /// <returns>the list of states</returns>
         public List<State<GenericRuntimeState>> GetAllStates()
         {
             return allStates;
         }
-        
+        /// <summary>
+        /// Get the names of all extended state variables in the metamodel
+        /// </summary>
+        /// <returns>the list of names</returns>
         public HashSet<string> GetExtendedStateVariables()
         {
             return extendedStateVariables;
