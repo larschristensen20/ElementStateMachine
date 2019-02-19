@@ -40,26 +40,46 @@ namespace ElementStateMachine
     /// </summary>
     public class GenericRuntimeState : AbstractRuntimeState<GenericRuntimeState>
     {
+        /// <summary>
+        /// The extended state
+        /// </summary>
         private Dictionary<string, int?> values = new Dictionary<string, int?>();
 
+        /// <summary>
+        /// Construct a generic state of the given set of variables
+        /// </summary>
+        /// <param name="variables">the set of legal names in the state machine</param>
         public GenericRuntimeState(HashSet<string> variables)
         {
             foreach (string v in variables)
                 values.Add(v, 0);
         }
 
+        /// <summary>
+        /// Look up the value of a variable
+        /// </summary>
+        /// <param name="name">the name of the variable</param>
+        /// <returns>the value of the variable</returns>
         public int? Get(string name)
         {
             if (!values.ContainsKey(name)) throw new Exception("Undeclared variable: " + name);
             return values[name];
         }
 
+        /// <summary>
+        /// Set the value of a variable
+        /// </summary>
+        /// <param name="name">the name of the variable to set</param>
+        /// <param name="value">the value to set the variable to</param>
         public void Set(string name, int? value)
         {
             if (!values.ContainsKey(name)) throw new Exception("Undeclared variable: " + name);
             values.Add(name, value);
         }
 
+        /// <summary>
+        /// Reset the runtime state
+        /// </summary>
         public override void ResetExtendedState()
         {
             foreach (KeyValuePair<string, int?> vars in values)
@@ -67,7 +87,11 @@ namespace ElementStateMachine
                 values[vars.Key] = 0;
             }
         }
-
+        /// <summary>
+        /// Get string presentation of the value of an extended state variable
+        /// </summary>
+        /// <param name="s">the name of the variable</param>
+        /// <returns>string representation of the state</returns>
         public override string GetExtendedState(string s)
         {
             if (s == null) return base.GetExtendedState(s);
